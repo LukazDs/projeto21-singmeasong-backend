@@ -36,4 +36,22 @@ describe("Test get top recommendations", () => {
 
     expect(result).toBe(expected);
   });
+
+  it("test get best recommendation in case of empty list return", async () => {
+    const amount: number = 10;
+    const expected = await recommendationFactory.getRecommendationByScore(
+      amount,
+      false
+    );
+
+    jest
+      .spyOn(recommendationRepository, "getAmountByScore")
+      .mockImplementationOnce((): any => {
+        return expected;
+      });
+
+    const result = await recommendationService.getTop(amount);
+
+    expect(result).toBe(expected);
+  });
 });

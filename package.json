@@ -7,7 +7,8 @@
     "start": "node ./dist/src/server.js",
     "dev": "nodemon ./src/server.ts",
     "build": "npx tsc && npx prisma generate && npx prisma migrate deploy",
-    "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test jest -i --coverage"
+    "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test jest -i",
+    "test:unit": "dotenv -e .env.test jest -- -i --coverage --testPathPattern=tests/unit"
   },
   "keywords": [],
   "author": "",

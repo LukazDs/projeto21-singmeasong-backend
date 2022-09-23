@@ -17,3 +17,23 @@ describe("Test get recommendations", () => {
     expect(result).toBe(expected);
   });
 });
+
+describe("Test get top recommendations", () => {
+  it("test get best recommendation in case of recommendation list return", async () => {
+    const amount: number = 10;
+    const expected = await recommendationFactory.getRecommendationByScore(
+      amount,
+      true
+    );
+
+    jest
+      .spyOn(recommendationRepository, "getAmountByScore")
+      .mockImplementationOnce((): any => {
+        return expected;
+      });
+
+    const result = await recommendationService.getTop(amount);
+
+    expect(result).toBe(expected);
+  });
+});

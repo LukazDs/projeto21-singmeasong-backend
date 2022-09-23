@@ -23,6 +23,24 @@ export async function createRecommendations() {
   return expected;
 }
 
+export async function getRecommendationByScore(
+  score: number,
+  hasElements: boolean
+) {
+  const expected = hasElements
+    ? [
+        {
+          id: 1,
+          name: faker.lorem.word(3),
+          youtubeLink: faker.internet.url(),
+          score,
+        },
+      ]
+    : [];
+
+  return expected;
+}
+
 function getRandom(max: number) {
   return Math.floor(Math.random() * max + 1);
 }

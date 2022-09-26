@@ -54,11 +54,13 @@ async function getRandom() {
   const scoreFilter = getScoreFilter(random);
 
   const recommendations = await getByScore(scoreFilter);
+
   if (recommendations.length === 0) {
     throw notFoundError();
   }
 
   const randomIndex = Math.floor(Math.random() * recommendations.length);
+
   return recommendations[randomIndex];
 }
 
@@ -91,4 +93,5 @@ export const recommendationService = {
   get,
   getById: getByIdOrFail,
   getTop,
+  getByScore,
 };

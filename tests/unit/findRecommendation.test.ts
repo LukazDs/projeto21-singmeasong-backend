@@ -2,6 +2,10 @@ import * as recommendationFactory from "../factories/recommendationFactory";
 import { recommendationService } from "../../src/services/recommendationsService";
 import { recommendationRepository } from "../../src/repositories/recommendationRepository";
 
+beforeEach(() => {
+  jest.clearAllMocks();
+});
+
 describe("Test get recommendations", () => {
   it("test get recommendation in case of success", async () => {
     const expected = await recommendationFactory.createRecommendations();
@@ -51,6 +55,25 @@ describe("Test get top recommendations", () => {
       });
 
     const result = await recommendationService.getTop(amount);
+
+    expect(result).toBe(expected);
+  });
+});
+
+describe("Test get random recommendations", () => {
+  it("test get random recommendation in case of recommendation list return", async () => {
+    const recommendations =
+      await recommendationFactory.getRecommendationRandom();
+
+    const expected = recommendations[0];
+
+    jest
+      .spyOn(recommendationRepository, "findAll")
+      .mockImplementationOnce((): any => {
+        return recommendations;
+      });
+
+    const result = await recommendationService.getRandom();
 
     expect(result).toBe(expected);
   });

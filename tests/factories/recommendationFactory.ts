@@ -16,7 +16,7 @@ export async function createRecommendations() {
       id: i,
       name: faker.lorem.word(3),
       youtubeLink: faker.internet.url(),
-      score: getRandom(10),
+      score: getRandomNumber(10),
     });
   }
 
@@ -41,6 +41,17 @@ export async function getRecommendationByScore(
   return expected;
 }
 
-function getRandom(max: number) {
+export async function getRecommendationRandom() {
+  return [
+    {
+      id: 1,
+      name: "teste teste",
+      youtubeLink: "https://youtube.com/title=borabill",
+      score: 99,
+    },
+  ];
+}
+
+function getRandomNumber(max: number) {
   return Math.floor(Math.random() * max + 1);
 }

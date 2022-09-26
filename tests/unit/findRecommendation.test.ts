@@ -78,3 +78,19 @@ describe("Test get random recommendations", () => {
     expect(result).toBe(expected);
   });
 });
+
+describe("Test get random recommendations", () => {
+  it("test get random recommendation in case of recommendation list return [] ", async () => {
+    const expected = { type: "not_found", message: "" ?? "" };
+
+    jest
+      .spyOn(recommendationRepository, "findAll")
+      .mockImplementationOnce((): any => {
+        return [];
+      });
+
+    const result = recommendationService.getRandom();
+
+    expect(result).rejects.toEqual(expected);
+  });
+});
